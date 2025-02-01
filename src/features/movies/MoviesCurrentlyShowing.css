@@ -1,0 +1,26 @@
+.poster {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    Max-height: 300px;
+}
+
+table {
+    display: flex;
+    justify-content: center;
+}
+
+
+.movie-title,
+.movie-votes,
+.movie-rating {
+    text-align: center;
+}
+
+.movie-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+}

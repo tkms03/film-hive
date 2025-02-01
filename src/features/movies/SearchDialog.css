@@ -1,0 +1,13 @@
+.searchDialog{
+    position:fixed;
+    top: 0px;
+    left: 0px;
+    /* height: 100px; */
+    width: 1000px;
+    z-index: 1000;
+    display: block;
+    border: 1px solid black;
+    padding: 5px;
+    background-color: white;
+    box-shadow: 5px;
+}

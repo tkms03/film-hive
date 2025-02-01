@@ -1,0 +1,44 @@
+{
+    "genres": [
+      { "id": "28", "valueJp": "アクション" ,"value": "Action" },
+      { "id": "12", "valueJp": "アドベンチャー" ,"value": "Adventure"},
+      { "id": "16", "valueJp": "アニメ" ,"value": "Animation"},
+      { "id": "35", "valueJp": "コメディ" ,"value": "Comedy"},
+      { "id": "80", "valueJp": "犯罪" ,"value": "Crime"},
+      { "id": "99", "valueJp": "ドキュメンタリー" ,"value": "Documentary"},
+      { "id": "18", "valueJp": "ドラマ" ,"value": "Drama"},
+      { "id": "10751", "valueJp": "ファミリー" ,"value": "Family"},
+      { "id": "14", "valueJp": "ファンタジー" ,"value": "Fantasy"},
+      { "id": "36", "valueJp": "歴史" ,"value": "History"},
+      { "id": "27", "valueJp": "ホラー" ,"value": "Horror"},
+      { "id": "10402", "valueJp": "音楽" ,"value": "Music"},
+      { "id": "9648", "valueJp": "ミステリー" ,"value": "Mystery"},
+      { "id": "10749", "valueJp": "ロマンス" ,"value": "Romance"},
+      { "id": "878", "valueJp": "サイエンスフィクション" ,"value": "Science Fiction"},
+      { "id": "10770", "valueJp": "テレビ映画" ,"value": "TV Movie"},
+      { "id": "53", "valueJp": "スリラー" ,"value": "Thriller"},
+      { "id": "10752", "valueJp": "戦争" ,"value": "War"},
+      { "id": "37", "valueJp": "西部劇" ,"value": "Western" }
+    ],
+    "rating": {
+      "min": 0,  
+      "max": 10,  
+      "step": 0.1  
+    },
+    "voteCount": {
+      "min": 0,  
+      "max": 7,  
+      "step": 1  
+    },
+    "scaleMarks": [
+      { "value": 0, "label": "0", "valueBehind": "0" },
+      { "value": 1, "label": "100", "valueBehind": "100"  },
+      { "value": 2, "label": "500", "valueBehind": "500"  },
+      { "value": 3, "label": "1000", "valueBehind": "1000"  },
+      { "value": 4, "label": "5000", "valueBehind": "5000"  },
+      { "value": 5, "label": "10000", "valueBehind": "10000"  },
+      { "value": 6, "label": "50000", "valueBehind": "50000"  },
+      { "value": 7, "label": "上限なし", "valueBehind": "9999999"  }
+    ]
+  }
+  
