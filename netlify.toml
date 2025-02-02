@@ -5,3 +5,6 @@
 [context.production.environment]
   NODE_VERSION = "18"  # Node.js のバージョン
   NPM_VERSION = "10.8.2"  # npm のバージョン
+
+[build.environment]
+  NODE_OPTIONS = "--openssl-legacy-provider"
