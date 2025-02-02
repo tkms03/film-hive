@@ -1,6 +1,6 @@
 [build]
   publish = "build"  # ビルド後の出力先ディレクトリ（build フォルダ）
-  command = "npm run build"  # ビルドを行うコマンド
+  command = "CI= npm run build"  # ビルドを行うコマンド
 
 [context.production.environment]
   NODE_VERSION = "18"  # Node.js のバージョン
