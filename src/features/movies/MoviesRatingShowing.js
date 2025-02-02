@@ -1,12 +1,25 @@
 // import React from 'react';
 import React, { useState, useEffect } from 'react';
-import Grid from '@mui/material/Grid'
+import Grid from '@mui/material/Grid';
 import './MoviesRatingShowing.css';
+import config from './moviesCriteria.json';
 
 export default function MoviesRatingShowing({ page }) {
 
     // サーバーのエンドポイントURL
-    const API_URL = 'http://127.0.0.1:5000/api/rating/';
+    // 開発環境
+    // const environment = "development";
+    // 本番環境
+    const environment = "production";
+    const envConfig = config.environments[environment];
+
+    // ベースURL + APIパス + エンドポイントを組み立てる関数
+    const getEndpointUrl = (endpointKey) => {
+        return envConfig.base_url + envConfig.api_prefix + config.endpoints[endpointKey];
+    };
+
+    // "rating" エンドポイントのURLを取得
+    const API_URL = getEndpointUrl("rating");
 
     const [movies, setMovies] = useState([]);
 

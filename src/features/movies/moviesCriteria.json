@@ -1,0 +1,19 @@
+{
+    "environments": {
+      "development": {
+        "base_url": "http://127.0.0.1:5000/",
+        "api_prefix": "api/"
+      },
+      "production": {
+        "base_url": "https://example.com/",
+        "api_prefix": "api/"
+      }
+    },
+    "endpoints": {
+      "movies": "movies/",
+      "popularity": "popularity/",
+      "rating": "rating/",
+      "search": "search/"
+    }
+  }
+  

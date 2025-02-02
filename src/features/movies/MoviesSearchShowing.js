@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import Grid from '@mui/material/Grid'
+import Grid from '@mui/material/Grid';
 import './MoviesSearchShowing.css';
+import config from './moviesCriteria.json';
 
 export default function MoviesSearchShowing({ page, searchParams }) {
 
     // サーバーのエンドポイントURL
-    const API_URL = 'http://127.0.0.1:5000/api/search/';
+    // 開発環境
+    // const environment = "development";
+    // 本番環境
+    const environment = "production";
+    const envConfig = config.environments[environment];
+
+    // ベースURL + APIパス + エンドポイントを組み立てる関数
+    const getEndpointUrl = (endpointKey) => {
+        return envConfig.base_url + envConfig.api_prefix + config.endpoints[endpointKey];
+    };
+
+    // "search" エンドポイントのURLを取得
+    const API_URL = getEndpointUrl("search");
 
     const [movies, setMovies] = useState([]);
 
