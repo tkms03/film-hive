@@ -8,9 +8,9 @@ export default function MoviesCurrentlyShowing({ page }) {
 
     // サーバーのエンドポイントURL
     // 開発環境
-    const environment = "development";
+    // const environment = "development";
     // 本番環境
-    // const environment = "production";
+    const environment = "production";
     const envConfig = config.environments[environment];
 
     // ベースURL + APIパス + エンドポイントを組み立てる関数
