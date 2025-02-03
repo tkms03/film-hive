@@ -8,11 +8,14 @@ import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 import { Box } from '@mui/material';
 import './MoviesShowing.css';
 
-export default function MoviesShowing({movies}) {
+export default function MoviesShowing({ movies }) {
 
     return (
         <div className="movies-laout">
-            <Grid container sx={{ justifyContent: "flex-start" }} spacing={0.5}>
+            <Grid container
+                sx={{ justifyContent: "flex-start" }}
+                rowSpacing={5}
+            >
                 {movies.map((movie, index) => (
                     <Grid size={{ xs: 6, sm: 3, md: 2, lg: 1.5 }} key={movie.id}>
                         <table className="table-layout">
@@ -23,9 +26,12 @@ export default function MoviesShowing({movies}) {
                                         <div>
                                             <div className="poster">
                                                 {movie.poster ? (
-                                                    <img src={`https://image.tmdb.org/t/p/w92${movie.poster}`} alt={movie.title}></img>
+                                                    <img
+                                                        src={`https://image.tmdb.org/t/p/w500${movie.poster}`}
+                                                        className="poster-image"
+                                                    />
                                                 ) : (
-                                                    <ImageNotSupportedIcon/>
+                                                    <ImageNotSupportedIcon />
                                                 )}
                                             </div>
                                             <div className="info-layout">
@@ -36,7 +42,7 @@ export default function MoviesShowing({movies}) {
                                                     <Grid size={6}>
                                                         <Box className="votes-layout" display="flex" justifyContent="center">
                                                             <VisibilityIcon
-                                                             style={{ fontSize: 20.1,}} />
+                                                                style={{ fontSize: 20.1, }} />
                                                         </Box>
                                                         <div className="movie-votes">{movie.voteCount}</div>
                                                     </Grid>

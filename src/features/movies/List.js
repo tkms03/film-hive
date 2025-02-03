@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Grid from "@mui/material/Grid2";
+import Button from '@mui/material/Button';
 import './List.css';
 import SearchDialog from './SearchDialog';
 
@@ -16,6 +17,10 @@ export default function List({ setActiveComponent, onSearch }) {
     }
     onSearch(params);
   };
+
+  function onClickList(){
+
+  }
 
 
   return (
@@ -34,13 +39,13 @@ export default function List({ setActiveComponent, onSearch }) {
           )}
         </Grid>
         <Grid size={{ sx: 3 }} sx={{ justifyContent: "space-evenly" }}>
-          <div onClick={() => setActiveComponent('currentlyShowing')}>公開中の映画</div>
+          <Button color="black" onClick={(className) => {setActiveComponent('currentlyShowing'); onClickList(className);}} className="currently-list">公開中の映画</Button>
         </Grid>
         <Grid size={{ sx: 3 }} sx={{ justifyContent: "space-evenly" }}>
-          <div onClick={() => setActiveComponent('popularityShowing')}>注目度の高い映画</div>
+          <Button color="black" onClick={(className) => {setActiveComponent('popularityShowing'); onClickList(className);}} className="popularity-list">注目度の高い映画</Button>
         </Grid>
-        <Grid size={{ sx: 3 }} sx={{ justifyContent: "space-evenly" }}>
-          <div onClick={() => setActiveComponent('ratingShowing')}>評価の高い映画</div>
+        <Grid size={{ sx: 3 }} sx={{ justifyContent: "space-evenly" }} className="rating-list">
+          <Button color="black" onClick={(className) => {setActiveComponent('ratingShowing'); onClickList(className);}}>評価の高い映画</Button>
         </Grid>
       </Grid>
     </dl>

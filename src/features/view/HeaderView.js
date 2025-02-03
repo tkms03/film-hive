@@ -1,5 +1,7 @@
 import React from 'react';
 import './HeaderView.css'
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 
 export default function MainView() {
   return (
@@ -12,10 +14,12 @@ export default function MainView() {
           </th>
         </div>
         <div className="site-header-middle">
-          {/* 映画ページへ遷移 */}
-          <th className="column">映画</th>
-          {/* テレビ番組ページへ遷移 */}
-          <th className="column">テレビ番組</th>
+          <ButtonGroup variant="outlined" color="black">
+            {/* 映画ページへ遷移 */}
+            <Button className="column">映画</Button>
+            {/* テレビ番組ページへ遷移 */}
+            <Button className="column">テレビ番組</Button>
+          </ButtonGroup>
         </div>
         <div className="site-header-end">
           {/* マイページへ遷移、未ログインの場合、ログインページへ遷移 */}

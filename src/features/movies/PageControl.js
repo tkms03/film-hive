@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 
 export default function PageControl({ currentPage, onPageChange }) {
     const [page, setPage] = useState(currentPage);
@@ -27,16 +29,16 @@ export default function PageControl({ currentPage, onPageChange }) {
         window.scroll({
             top: 0,
             behavior: "smooth",
-          });
+        });
     }
 
     return (
         <table>
             <tbody>
                 <tr>
-                    <td onClick={handlePrev} style={{ cursor: 'pointer' }}>前へ</td>
-                    <td>{page * 20 - 19} ~ {page * 20}</td>
-                    <td onClick={handleNext} style={{ cursor: 'pointer' }}>次へ</td>
+                    <td><Button onClick={handlePrev} style={{ cursor: 'pointer' }}>前へ</Button></td>
+                    <td><p>{page * 20 - 19} ~ {page * 20}</p></td>
+                    <td><Button onClick={handleNext} style={{ cursor: 'pointer' }}>次へ</Button></td>
                 </tr>
             </tbody>
         </table>
