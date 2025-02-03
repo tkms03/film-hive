@@ -26,8 +26,9 @@
 
 .Title-header {
   width: 100%; /* テーブル全体をウィンドウ幅に合わせる */
+  height: 30px;
   /* background-color: #282c34; */
-  min-height: 20vh;
+  /* min-height: 20vh; */
   display: flex;
   /* flex-direction: column; */
   /* align-items: center; */

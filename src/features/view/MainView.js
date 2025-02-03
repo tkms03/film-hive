@@ -10,11 +10,11 @@ import './MainView.css'
 
 export default function MainView() {
     // ページ番号を管理
-    const [page, setPage] = useState(1); 
+    const [page, setPage] = useState(1);
     // 表示コンポーネントを管理
-    const [activeComponent, setActiveComponent] = useState('currentlyShowing'); 
+    const [activeComponent, setActiveComponent] = useState('currentlyShowing');
     // 検索パラメータを管理
-    const [searchParams, setSearchParams] = useState(null); 
+    const [searchParams, setSearchParams] = useState(null);
 
     // 動的に切り替えるコンポーネントのマッピング
     const components = {
@@ -42,14 +42,23 @@ export default function MainView() {
     };
 
     return (
-        <Grid container spacing={0}>
-            <Grid xs={2}>
+        <div>
+            <div>
                 <List setActiveComponent={handleComponentChange} onSearch={handleSearch} />
-            </Grid>
-            <Grid xs={10}>
-                {components[activeComponent] }
+            </div>
+            <div>
+                {components[activeComponent]}
                 <PageControl currentPage={page} onPageChange={updatePage} />
-            </Grid>
-        </Grid>
+            </div>
+        </div>
+        // <Grid container spacing={0}>
+        //     <Grid xs={2}>
+        //         <List setActiveComponent={handleComponentChange} onSearch={handleSearch} />
+        //     </Grid>
+        //     <Grid xs={10}>
+        //         {components[activeComponent] }
+        //         <PageControl currentPage={page} onPageChange={updatePage} />
+        //     </Grid>
+        // </Grid>
     );
 }

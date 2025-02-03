@@ -8,17 +8,27 @@ export default function PageControl({ currentPage, onPageChange }) {
         setPage(currentPage);
     }, [currentPage]);
 
+    // 次ページ
     const handleNext = () => {
         const newPage = page + 1;
-        setPage(newPage);
-        onPageChange(newPage);
+        handlePageChange(newPage);
     };
 
+    // 前ページ
     const handlePrev = () => {
         const newPage = Math.max(1, page - 1);
+        handlePageChange(newPage);
+    };
+
+    // ページ変更時
+    const handlePageChange = (newPage) => {
         setPage(newPage);
         onPageChange(newPage);
-    };
+        window.scroll({
+            top: 0,
+            behavior: "smooth",
+          });
+    }
 
     return (
         <table>

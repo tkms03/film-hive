@@ -1,0 +1,43 @@
+.poster {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    Max-height: 150px;
+}
+
+table {
+    display: flex;
+    justify-content: center;
+}
+
+.table-layout {
+    /* background-color:beige; */
+    /* min-width: 205px; */
+
+}
+
+.movie-layout {
+    /* min-width: 205px; */
+    /* width: 120px; */
+}
+
+.movie-title {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    font-size: 12px;
+}
+
+.rating-layout {
+    height: 10px;
+    align-items:"center";
+}
+
+.movie-votes,
+.movie-rating {
+    text-align: center;
+    font-size: 10px;
+}

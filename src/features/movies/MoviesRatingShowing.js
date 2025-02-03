@@ -1,16 +1,16 @@
 // import React from 'react';
 import React, { useState, useEffect } from 'react';
-import Grid from '@mui/material/Grid';
-import './MoviesRatingShowing.css';
+import MoviesShowing from './MoviesShowing';
+import './MoviesShowing.css';
 import config from './moviesCriteria.json';
 
 export default function MoviesRatingShowing({ page }) {
 
     // サーバーのエンドポイントURL
     // 開発環境
-    // const environment = "development";
+    const environment = "development";
     // 本番環境
-    const environment = "production";
+    // const environment = "production";
     const envConfig = config.environments[environment];
 
     // ベースURL + APIパス + エンドポイントを組み立てる関数
@@ -73,44 +73,6 @@ export default function MoviesRatingShowing({ page }) {
     }
 
     return (
-        <div className="movies-laout">
-            <Grid container>
-                {movies.map((movie, index) => (
-                    <Grid xs={3} key={movie.id}>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td key={index} className="movie-layout">
-                                        {/* 1タイトルの情報 */}
-                                        <div>
-                                            <div className="poster">
-                                                {movie.poster ? (
-                                                    <img src={`https://image.tmdb.org/t/p/w200${movie.poster}`} alt={movie.title}></img>
-                                                ) : (
-                                                    <>{movie.title}</>
-                                                )}
-                                            </div>
-                                            <div className="info-layout">
-                                                <Grid container>
-                                                    <Grid xs={12}>
-                                                        <div className="movie-title">{movie.title}</div>
-                                                    </Grid>
-                                                    <Grid xs={6}>
-                                                        <div className="movie-votes">{movie.voteCount}</div>
-                                                    </Grid>
-                                                    <Grid xs={6}>
-                                                        <div className="movie-rating">{movie.vote_average}</div>
-                                                    </Grid>
-                                                </Grid>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </Grid>
-                ))}
-            </Grid>
-        </div>
+        <MoviesShowing movies={movies}/>
     );
 }
