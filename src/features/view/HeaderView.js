@@ -14,11 +14,11 @@ export default function MainView() {
           </th>
         </div>
         <div className="site-header-middle">
-          <ButtonGroup variant="outlined" color="black">
+          <ButtonGroup color="black">
             {/* 映画ページへ遷移 */}
-            <Button className="column">映画</Button>
+            <Button className="column" variant="contained" sx={{ backgroundColor: '#000', color: '#FFF' }}>映画</Button>
             {/* テレビ番組ページへ遷移 */}
-            <Button className="column">テレビ番組</Button>
+            <Button className="column" variant="outlined">テレビ番組</Button>
           </ButtonGroup>
         </div>
         <div className="site-header-end">

@@ -31,7 +31,7 @@ export default function MoviesShowing({ movies }) {
                                                         className="poster-image"
                                                     />
                                                 ) : (
-                                                    <ImageNotSupportedIcon />
+                                                    <ImageNotSupportedIcon className="poster-image"/>
                                                 )}
                                             </div>
                                             <div className="info-layout">

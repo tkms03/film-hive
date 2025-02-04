@@ -1,22 +1,37 @@
 import React, { useState } from "react";
+import Grid from "@mui/material/Grid2";
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import Button from '@mui/material/Button';
 import { createPortal } from "react-dom";
 import dayjs from 'dayjs';
+import ja from 'date-fns/locale/ja'
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import { Slider, TextField, FormControlLabel, Checkbox, Typography, Box } from '@mui/material'
+import { Slider, TextField, toolbar, FormControlLabel, Checkbox, Typography, Box } from '@mui/material'
 import './SearchDialog.css'
 import searchCriteria from './searchCriteria.json';  // JSONをインポート
 
-export default function SearchDialog({ onSearch }) {
+export default function SearchDialog({
+    open,
+    onSearch,
+    onClose,
+    setActiveButton,
+    activeSearchComponent }) {
 
+    // // ダイアログの表示制御
+    // const [open, setOpen] = React.useState(false);
     // ダイアログの開閉状態を表すState(falseで閉じた状態)
-    const [show, setShow] = useState(false);
+    // const [show, setShow] = useState(open);
     // カレンダーの表示制御用ステート（FROM,TO）
     const [openFrom, setOpenFrom] = useState(false);
     const [openTo, setOpenTo] = useState(false);
@@ -34,11 +49,9 @@ export default function SearchDialog({ onSearch }) {
     const currentYear = dayjs();
     const theme = createTheme();
 
-    // ボタンクリック時のハンドラー(stateをオンオフ)
-    const handleDialog = () => setShow(s => !s);
-
     // 検索ボタンをクリック
     const handleSearchClick = () => {
+
         // 収集した検索条件を親コンポーネントに渡す
         if (typeof onSearch === "function") {
 
@@ -51,13 +64,13 @@ export default function SearchDialog({ onSearch }) {
             const searchData = {
                 // keyword: keyword,
                 releaseYear: {
-                    from: valueFrom ? valueFrom.toDate().toLocaleDateString(
+                    from: dayjs.isDayjs(valueFrom) ? valueFrom.toDate().toLocaleDateString(
                         "ja-JP", {
                         year: "numeric",
                         month: "2-digit",
                         day: "2-digit"
                     }).replaceAll('/', '-') : '',
-                    to: valueTo ? valueTo.toDate().toLocaleDateString(
+                    to: dayjs.isDayjs(valueTo) ? valueTo.toDate().toLocaleDateString(
                         "ja-JP", {
                         year: "numeric",
                         month: "2-digit",
@@ -81,7 +94,11 @@ export default function SearchDialog({ onSearch }) {
         } else {
             console.error("Error: onSearch is not a function!", onSearch);
         }
-        setShow(false);  // ダイアログを閉じる
+
+        // ここで activeSearchComponent を呼び出して searchShowing に設定
+        activeSearchComponent;
+        setActiveButton('searchShowing');
+        onClose();
     };
 
     // キーワードを更新
@@ -122,35 +139,37 @@ export default function SearchDialog({ onSearch }) {
     const handleDateChangeFrom = (newValue) => setValueFrom(newValue);
     const handleDateChangeTo = (newValue) => setValueTo(newValue);
 
+    // ボタンクリック時のハンドラー(stateをオンオフ)
+    const handleDialog = () => setShow(true);
+    const handleDialogClose = () => setShow(false);
 
 
     return (
-        <form>
-            <button type="button" onClick={handleDialog} disabled={show}>
-                検索
-            </button>
-            {show && createPortal(
-                <div className="searchDialog">
-                    <ThemeProvider theme={theme}>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <p>検索条件</p>
-                            {/* <Typography component="legend">キーワード</Typography>
-                            <TextField
-                                id="keyword"
-                                value={keyword || ''}
-                                onChange={handleKeywordChange}
-                            /> */}
+        <Dialog
+            open={open}
+            onClose={onclose}
+        >
+            <DialogTitle id="alert-dialog-title">
+                {"検索条件"}
+            </DialogTitle>
+            <DialogContent>
+                <LocalizationProvider
+                    dateAdapter={AdapterDateFns}
+                    adapterLocale={ja}
+                    dateFormats={{ dayOfMonthFull: 'yyyy年 MM月 dd日' }}
+                >
+                    <Grid container rowSpacing={1}>
+                        <Grid item xs={12}>
                             <Typography component="legend">公開年</Typography>
-                            <DemoContainer components={['MobileDatePicker ']}>
-                                <DemoItem>
-                                    {/* FROM カレンダー */}
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={6}>
                                     <MobileDatePicker
                                         label={'FROM'}
                                         views={['year', 'month', 'day']}
-                                        format="YYYY-MM-DD"
+                                        format="yyyy年MM月dd日"
                                         openTo="year"
-                                        maxDate={currentYear}
-                                        minDate={dayjs('1800-01-01')}
                                         yearsOrder="desc"
                                         open={openFrom}
                                         onOpen={() => setOpenFrom(true)}
@@ -159,32 +178,43 @@ export default function SearchDialog({ onSearch }) {
                                         onChange={handleDateChangeFrom}
                                         slotProps={{
                                             textField: {
+                                                size: "small",
+                                                sx: {
+                                                    width: '250px', // 横幅を変更
+                                                    '& .MuiInputBase-root': {
+                                                        fontSize: '13px', // 文字のサイズを変更
+                                                        padding: '1px', // 内側の余白を調整
+                                                    },
+                                                },
                                                 InputProps: {
                                                     endAdornment: (
-                                                        <>
-                                                            {valueFrom && (
-                                                                <IconButton onClick={onClearFrom}>
-                                                                    <ClearIcon />
-                                                                </IconButton>
-                                                            )}
-                                                            <IconButton onClick={() => setOpenFrom(true)}>
-                                                                <CalendarTodayIcon />
-                                                            </IconButton>
-                                                        </>
+                                                        <IconButton onClick={() => setOpenFrom(true)}>
+                                                            <CalendarTodayIcon />
+                                                        </IconButton>
                                                     ),
                                                 },
                                             },
+                                            toolbar: {
+                                                hidden: true,
+                                            },
+                                            actionBar: {
+                                                actions: ['cancel', 'clear', 'today', 'accept'],
+                                                sx: {
+                                                    "& .MuiButton-root": {
+                                                        fontSize: "12px",
+                                                        minWidth: "75px",
+                                                    }
+                                                }
+                                            }
                                         }}
                                     />
-
-                                    {/* TO カレンダー */}
+                                </Grid>
+                                <Grid item xs={6}>
                                     <MobileDatePicker
                                         label={'TO'}
                                         views={['year', 'month', 'day']}
-                                        format="YYYY-MM-DD"
+                                        format="yyyy年MM月dd日"
                                         openTo="year"
-                                        maxDate={currentYear}
-                                        minDate={dayjs('1800-01-01')}
                                         yearsOrder="desc"
                                         open={openTo}
                                         onOpen={() => setOpenTo(true)}
@@ -193,76 +223,121 @@ export default function SearchDialog({ onSearch }) {
                                         onChange={handleDateChangeTo}
                                         slotProps={{
                                             textField: {
+                                                size: "small",
+                                                sx: {
+                                                    width: '250px',
+                                                    '& .MuiInputBase-root': {
+                                                        fontSize: '12px',
+                                                        padding: '1px',
+                                                    },
+                                                },
                                                 InputProps: {
                                                     endAdornment: (
-                                                        <>
-                                                            {valueTo && (
-                                                                <IconButton onClick={onClearTo}>
-                                                                    <ClearIcon />
-                                                                </IconButton>
-                                                            )}
-                                                            <IconButton onClick={() => setOpenTo(true)}>
-                                                                <CalendarTodayIcon />
-                                                            </IconButton>
-                                                        </>
+                                                        <IconButton onClick={() => setOpenTo(true)}>
+                                                            <CalendarTodayIcon />
+                                                        </IconButton>
                                                     ),
                                                 },
                                             },
+                                            toolbar: {
+                                                hidden: true,
+                                            },
+                                            actionBar: {
+                                                actions: ['cancel', 'clear', 'today', 'accept'],
+                                                sx: {
+                                                    "& .MuiButton-root": {
+                                                        fontSize: "12px",
+                                                        minWidth: "75px",
+                                                    }
+                                                }
+                                            }
                                         }}
                                     />
-                                </DemoItem>
-                            </DemoContainer>
+                                </Grid>
+                            </Grid>
+                        </Grid>
 
-                            <Typography component="legend">ジャンル</Typography>
-                            <Box sx={{ width: 1000 }}>
-                                {searchCriteria.genres.map(genre => (
-                                    <FormControlLabel
-                                        key={genre.id}
-                                        control={
-                                            <Checkbox
-                                                name={genre.id}
-                                                checked={checkboxes[genre.id] || false}
-                                                onChange={handleCheckboxChange}
-                                            />}
-                                        value={genre.value}
-                                        label={genre.valueJp}
+                        <Grid item xs={12}>
+                            <Grid container rowSpacing={0}>
+                                <Grid item xs={12}>
+                                    <Typography component="legend">ジャンル</Typography>
+                                </Grid>
+                                <Grid container rowSpacing={0} columnSpacing={3}>
+                                    {searchCriteria.genres.map(genre => (
+                                        <Grid item xs={12}>
+                                            <FormControlLabel
+                                                key={genre.id}
+                                                control={
+                                                    <Checkbox
+                                                        name={genre.id}
+                                                        checked={checkboxes[genre.id] || false}
+                                                        onChange={handleCheckboxChange}
+                                                        sx={{ transform: "scale(0.7)" ,padding: "0px"}} // チェックボックスを小さくする
+                                                    />}
+                                                value={genre.value}
+                                                label={genre.valueJp}
+                                                sx={{ margin: "0" ,fontSize: "10px", gap: "0px"}} // ラベルの余白をなくす
+                                                size="small"
+                                            />
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        {/* </Box> */}
+                        <Grid item xs={12}>
+                            <Grid container rowSpacing={3.5}>
+                                <Grid item xs={12}>
+                                    <Typography component="legend">評価　</Typography>
+                                </Grid>
+                                <Grid item xs={12} sx={{ display: "flex", justifyContent: "flex-end" }}>
+                                    <Slider
+                                        getAriaLabel={() => 'Temperature range'}
+                                        value={ratingValue}
+                                        min={searchCriteria.rating.min}
+                                        max={searchCriteria.rating.max}
+                                        step={searchCriteria.rating.step}
+                                        onChange={handleRatingChange}
+                                        valueLabelDisplay="on"
+                                        sx={{ width: 500 }}
+                                        size="small"
+                                        aria-label="Small"
+                                        color="black"
                                     />
-                                ))}
-                            </Box>
-                            <Typography component="legend">評価</Typography>
-                            <Box sx={{ width: 500 }}>
-                                <Slider
-                                    getAriaLabel={() => 'Temperature range'}
-                                    value={ratingValue}
-                                    min={searchCriteria.rating.min}
-                                    max={searchCriteria.rating.max}
-                                    step={searchCriteria.rating.step}
-                                    onChange={handleRatingChange}
-                                    valueLabelDisplay="on"
-                                />
-                            </Box>
-                            <Typography component="legend">投票数</Typography>
-                            <Box sx={{ width: 500 }}>
-                                <Slider
-                                    value={voteValue}
-                                    onChange={handleVoteChange}
-                                    max={searchCriteria.voteCount.max}
-                                    step={searchCriteria.voteCount.step}
-                                    marks={searchCriteria.scaleMarks}
-                                />
-                            </Box>
-                            <button type="button" onClick={handleSearchClick}>
-                                検索
-                            </button>
-                            <button type="button" onClick={handleDialog}>
-                                閉じる
-                            </button>
-                        </LocalizationProvider>
-                    </ThemeProvider>
-                </div>,
-                document.getElementById("searchDialog")
-            )}
-        </form>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Grid container rowSpacing={0}>
+                                <Grid item xs={12}>
+                                    <Typography component="legend">投票数</Typography>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Slider
+                                        value={voteValue}
+                                        onChange={handleVoteChange}
+                                        max={searchCriteria.voteCount.max}
+                                        step={searchCriteria.voteCount.step}
+                                        marks={searchCriteria.scaleMarks}
+                                        sx={{ width: 500 }}
+                                        size="small"
+                                        color="black"
+                                    />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </LocalizationProvider>
+            </DialogContent >
+            <DialogActions>
+                <Button type="button" onClick={handleSearchClick}>
+                    検索
+                </Button>
+                <Button type="button" onClick={onClose}>
+                    閉じる
+                </Button>
+            </DialogActions>
+        </Dialog >
     )
 
 }

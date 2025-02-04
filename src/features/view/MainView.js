@@ -31,8 +31,11 @@ export default function MainView() {
 
     // コンポーネントを切り替えた際にページ番号をリセットする関数
     const handleComponentChange = (newComponent) => {
-        setActiveComponent(newComponent);
-        setPage(1); // ページ番号をリセット
+        // 絞り込み検索以外の場合、処理を行う
+        if (newComponent != ('searchShowing')) {
+            setActiveComponent(newComponent);
+            setPage(1); // ページ番号をリセット
+        }
     };
 
     // 🔥 検索時の処理
