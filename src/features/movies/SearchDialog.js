@@ -160,7 +160,9 @@ export default function SearchDialog({
                 >
                     <Grid container rowSpacing={1}>
                         <Grid item xs={12}>
-                            <Typography component="legend">公開年</Typography>
+                            <Typography component="legend" sx={{ width: '75px', fontSize: '14px', color:'white', backgroundColor: '#454545' }}>
+                                公開年
+                            </Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Grid container spacing={2}>
@@ -258,9 +260,11 @@ export default function SearchDialog({
                         </Grid>
 
                         <Grid item xs={12}>
-                            <Grid container rowSpacing={0}>
+                            <Grid container rowSpacing={0.5}>
                                 <Grid item xs={12}>
-                                    <Typography component="legend">ジャンル</Typography>
+                                <Typography component="legend" sx={{ width: '75px', fontSize: '14px', color:'white', backgroundColor: '#454545' }}>
+                                        ジャンル
+                                    </Typography>
                                 </Grid>
                                 <Grid container rowSpacing={0} columnSpacing={3}>
                                     {searchCriteria.genres.map(genre => (
@@ -272,11 +276,11 @@ export default function SearchDialog({
                                                         name={genre.id}
                                                         checked={checkboxes[genre.id] || false}
                                                         onChange={handleCheckboxChange}
-                                                        sx={{ transform: "scale(0.7)" ,padding: "0px"}} // チェックボックスを小さくする
+                                                        sx={{ transform: "scale(0.7)", padding: "0px" }} // チェックボックスを小さくする
                                                     />}
                                                 value={genre.value}
                                                 label={genre.valueJp}
-                                                sx={{ margin: "0" ,fontSize: "10px", gap: "0px"}} // ラベルの余白をなくす
+                                                sx={{ margin: "0", fontSize: "10px", gap: "0px" }} // ラベルの余白をなくす
                                                 size="small"
                                             />
                                         </Grid>
@@ -288,7 +292,9 @@ export default function SearchDialog({
                         <Grid item xs={12}>
                             <Grid container rowSpacing={3.5}>
                                 <Grid item xs={12}>
-                                    <Typography component="legend">評価　</Typography>
+                                <Typography component="legend" sx={{ width: '75px', fontSize: '14px', color:'white', backgroundColor: '#454545' }}>
+                                        評価
+                                    </Typography>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Slider
@@ -310,7 +316,9 @@ export default function SearchDialog({
                         <Grid item xs={12}>
                             <Grid container rowSpacing={0}>
                                 <Grid item xs={12}>
-                                    <Typography component="legend">投票数</Typography>
+                                <Typography component="legend" sx={{ width: '75px', fontSize: '14px', color:'white', backgroundColor: '#454545' }}>
+                                        投票数
+                                    </Typography>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Slider
@@ -319,11 +327,12 @@ export default function SearchDialog({
                                         max={searchCriteria.voteCount.max}
                                         step={searchCriteria.voteCount.step}
                                         marks={searchCriteria.scaleMarks}
-                                        sx={{ width: 500,
+                                        sx={{
+                                            width: 500,
                                             '& .MuiSlider-markLabel': {
-                                            fontSize: '12px', // フォントサイズ変更
-                                          },
-                                         }}
+                                                fontSize: '10px', // フォントサイズ変更
+                                            },
+                                        }}
                                         size="small"
                                         color="black"
                                     />
