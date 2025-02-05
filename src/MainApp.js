@@ -1,9 +1,14 @@
+import React, { useEffect } from 'react';
 import Grid from "@mui/material/Grid";
 import './MainApp.css';
 import MainView from './features/view/MainView';
 import HeaderView from './features/view/HeaderView';
 
 function MainApp() {
+    useEffect(() => {
+        document.documentElement.setAttribute("translate", "no");
+    }, []);
+    
     return (
         <Grid container spacing={0} sx={{ width: '100%' }}>
             <Grid
