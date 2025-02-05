@@ -158,14 +158,14 @@ export default function SearchDialog({
                     adapterLocale={ja}
                     dateFormats={{ dayOfMonthFull: 'yyyy年 MM月 dd日' }}
                 >
-                    <Grid container rowSpacing={1}>
-                        <Grid item xs={12}>
-                            <Typography component="legend" sx={{ width: '75px', fontSize: '14px', color:'white', backgroundColor: '#454545' }}>
+                    <Grid container rowSpacing={1} sx={{ width: '100%' }}>
+                        <Grid item xs={12} sx={{ width: '100%' }}>
+                            <Typography component="legend" sx={{ width: '100%', fontSize: '14px', color: 'white', backgroundColor: '#454545' }}>
                                 公開年
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <Grid container spacing={2}>
+                            <Grid container spacing={2} sx={{ width: '100%' }}>
                                 <Grid item xs={6}>
                                     <MobileDatePicker
                                         label={'FROM'}
@@ -259,14 +259,14 @@ export default function SearchDialog({
                             </Grid>
                         </Grid>
 
-                        <Grid item xs={12}>
-                            <Grid container rowSpacing={0.5}>
-                                <Grid item xs={12}>
-                                <Typography component="legend" sx={{ width: '75px', fontSize: '14px', color:'white', backgroundColor: '#454545' }}>
+                        <Grid item xs={12} sx={{ width: '100%' }}>
+                            <Grid container rowSpacing={0.5} sx={{ width: '100%' }}>
+                                <Grid item xs={12} sx={{ width: '100%' }}>
+                                    <Typography component="legend" sx={{ width: '100%', fontSize: '14px', color: 'white', backgroundColor: '#454545' }}>
                                         ジャンル
                                     </Typography>
                                 </Grid>
-                                <Grid container rowSpacing={0} columnSpacing={3}>
+                                <Grid container rowSpacing={0} columnSpacing={3} sx={{ width: '100%' }}>
                                     {searchCriteria.genres.map(genre => (
                                         <Grid item xs={12}>
                                             <FormControlLabel
@@ -289,14 +289,14 @@ export default function SearchDialog({
                             </Grid>
                         </Grid>
                         {/* </Box> */}
-                        <Grid item xs={12}>
-                            <Grid container rowSpacing={3.5}>
-                                <Grid item xs={12}>
-                                <Typography component="legend" sx={{ width: '75px', fontSize: '14px', color:'white', backgroundColor: '#454545' }}>
+                        <Grid item xs={12} sx={{ width: '100%' }}>
+                            <Grid container rowSpacing={3.5} sx={{ width: '100%' }}>
+                                <Grid item xs={12} sx={{ width: '100%' }}>
+                                    <Typography component="legend" sx={{ width: '100%', fontSize: '14px', color: 'white', backgroundColor: '#454545' }}>
                                         評価
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={12}>
+                                <Grid item xs={12} sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                                     <Slider
                                         getAriaLabel={() => 'Temperature range'}
                                         value={ratingValue}
@@ -305,7 +305,9 @@ export default function SearchDialog({
                                         step={searchCriteria.rating.step}
                                         onChange={handleRatingChange}
                                         valueLabelDisplay="on"
-                                        sx={{ width: 500 }}
+                                        sx={{
+                                            width: '90%',
+                                        }}
                                         size="small"
                                         aria-label="Small"
                                         color="black"
@@ -313,14 +315,14 @@ export default function SearchDialog({
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid item xs={12}>
-                            <Grid container rowSpacing={0}>
-                                <Grid item xs={12}>
-                                <Typography component="legend" sx={{ width: '75px', fontSize: '14px', color:'white', backgroundColor: '#454545' }}>
+                        <Grid item xs={12} sx={{ width: '100%' }}>
+                            <Grid container rowSpacing={0} sx={{ width: '100%' }}>
+                                <Grid item xs={12} sx={{ width: '100%', backgroundColor: '#454545' }}>
+                                    <Typography component="legend" sx={{ width: '100px', fontSize: '14px', color: 'white', backgroundColor: '#454545' }}>
                                         投票数
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={12}>
+                                <Grid item xs={12} sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                                     <Slider
                                         value={voteValue}
                                         onChange={handleVoteChange}
@@ -328,7 +330,7 @@ export default function SearchDialog({
                                         step={searchCriteria.voteCount.step}
                                         marks={searchCriteria.scaleMarks}
                                         sx={{
-                                            width: 500,
+                                            width: '90%',
                                             '& .MuiSlider-markLabel': {
                                                 fontSize: '10px', // フォントサイズ変更
                                             },
