@@ -290,7 +290,7 @@ export default function SearchDialog({
                                 <Grid item xs={12}>
                                     <Typography component="legend">評価　</Typography>
                                 </Grid>
-                                <Grid item xs={12} sx={{ display: "flex", justifyContent: "flex-end" }}>
+                                <Grid item xs={12}>
                                     <Slider
                                         getAriaLabel={() => 'Temperature range'}
                                         value={ratingValue}
@@ -319,7 +319,11 @@ export default function SearchDialog({
                                         max={searchCriteria.voteCount.max}
                                         step={searchCriteria.voteCount.step}
                                         marks={searchCriteria.scaleMarks}
-                                        sx={{ width: 500 }}
+                                        sx={{ width: 500,
+                                            '& .MuiSlider-markLabel': {
+                                            fontSize: '12px', // フォントサイズ変更
+                                          },
+                                         }}
                                         size="small"
                                         color="black"
                                     />
