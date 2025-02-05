@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Grid from '@mui/material/Grid'
+import Grid from "@mui/material/Grid2";
 import List from '../movies/List';
 import MoviesCurrentlyShowing from '../movies/MoviesCurrentlyShowing';
 import MoviesPopularityShowing from '../movies/MoviesPopularityShowing';
@@ -45,23 +45,25 @@ export default function MainView() {
     };
 
     return (
-        <div>
-            <div>
-                <List setActiveComponent={handleComponentChange} onSearch={handleSearch} />
-            </div>
-            <div>
-                {components[activeComponent]}
-                <PageControl currentPage={page} onPageChange={updatePage} />
-            </div>
-        </div>
-        // <Grid container spacing={0}>
-        //     <Grid xs={2}>
+        // <div>
+        //     <div>
         //         <List setActiveComponent={handleComponentChange} onSearch={handleSearch} />
-        //     </Grid>
-        //     <Grid xs={10}>
-        //         {components[activeComponent] }
+        //     </div>
+        //     <div>
+        //         {components[activeComponent]}
         //         <PageControl currentPage={page} onPageChange={updatePage} />
-        //     </Grid>
-        // </Grid>
+        //     </div>
+        // </div>
+        <Grid container spacing={0} sx={{ width: '100%' }}>
+            <Grid xs={2}  sx={{ width: '100%' }}>
+                <List setActiveComponent={handleComponentChange} onSearch={handleSearch} />
+            </Grid>
+            <Grid xs={12} sx={{ width: '100%' }}>
+                {components[activeComponent] }
+            </Grid>
+            <Grid xs={12} sx={{ width: '100%' }}>
+                <PageControl currentPage={page} onPageChange={updatePage} />
+            </Grid>
+        </Grid>
     );
 }

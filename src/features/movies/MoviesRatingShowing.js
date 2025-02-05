@@ -44,7 +44,6 @@ export default function MoviesRatingShowing({ page }) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json();
-            console.log('Movies:', data);
             dataCreate(data);
         } catch (error) {
             console.error('Error fetching movies:', error);

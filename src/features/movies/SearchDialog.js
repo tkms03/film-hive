@@ -5,17 +5,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
-import { createPortal } from "react-dom";
 import dayjs from 'dayjs';
 import ja from 'date-fns/locale/ja'
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
-import ClearIcon from "@mui/icons-material/Clear";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import { Slider, TextField, toolbar, FormControlLabel, Checkbox, Typography, Box } from '@mui/material'
 import './SearchDialog.css'
@@ -28,10 +23,6 @@ export default function SearchDialog({
     setActiveButton,
     activeSearchComponent }) {
 
-    // // ダイアログの表示制御
-    // const [open, setOpen] = React.useState(false);
-    // ダイアログの開閉状態を表すState(falseで閉じた状態)
-    // const [show, setShow] = useState(open);
     // カレンダーの表示制御用ステート（FROM,TO）
     const [openFrom, setOpenFrom] = useState(false);
     const [openTo, setOpenTo] = useState(false);
@@ -46,8 +37,6 @@ export default function SearchDialog({
     // 日付の状態
     const [valueFrom, setValueFrom] = useState(null);
     const [valueTo, setValueTo] = useState(null);
-    const currentYear = dayjs();
-    const theme = createTheme();
 
     // 検索ボタンをクリック
     const handleSearchClick = () => {
@@ -124,25 +113,9 @@ export default function SearchDialog({
         }));
     };
 
-    // クリアボタンのクリック時の処理
-    const onClearFrom = () => {
-        setValueFrom(null);
-        setOpenFrom(false);
-    };
-
-    const onClearTo = () => {
-        setValueTo(null);
-        setOpenTo(false);
-    };
-
     // 日付を選択したときのハンドラー
     const handleDateChangeFrom = (newValue) => setValueFrom(newValue);
     const handleDateChangeTo = (newValue) => setValueTo(newValue);
-
-    // ボタンクリック時のハンドラー(stateをオンオフ)
-    const handleDialog = () => setShow(true);
-    const handleDialogClose = () => setShow(false);
-
 
     return (
         <Dialog
@@ -164,8 +137,8 @@ export default function SearchDialog({
                                 公開年
                             </Typography>
                         </Grid>
-                        <Grid item xs={12}>
-                            <Grid container spacing={2} sx={{ width: '100%' }}>
+                        <Grid item xs={12} sx={{ width: '100%' }}>
+                            <Grid container spacing={2} sx={{ width: '100%' , justifyContent: 'center'}}>
                                 <Grid item xs={6}>
                                     <MobileDatePicker
                                         label={'FROM'}
@@ -182,7 +155,7 @@ export default function SearchDialog({
                                             textField: {
                                                 size: "small",
                                                 sx: {
-                                                    width: '250px', // 横幅を変更
+                                                    width: '95%', // 横幅を変更
                                                     '& .MuiInputBase-root': {
                                                         fontSize: '13px', // 文字のサイズを変更
                                                         padding: '1px', // 内側の余白を調整
@@ -211,7 +184,7 @@ export default function SearchDialog({
                                         }}
                                     />
                                 </Grid>
-                                <Grid item xs={6}>
+                                <Grid item xs={6} >
                                     <MobileDatePicker
                                         label={'TO'}
                                         views={['year', 'month', 'day']}
@@ -227,7 +200,7 @@ export default function SearchDialog({
                                             textField: {
                                                 size: "small",
                                                 sx: {
-                                                    width: '250px',
+                                                    width: '95%',
                                                     '& .MuiInputBase-root': {
                                                         fontSize: '12px',
                                                         padding: '1px',
@@ -266,7 +239,7 @@ export default function SearchDialog({
                                         ジャンル
                                     </Typography>
                                 </Grid>
-                                <Grid container rowSpacing={0} columnSpacing={3} sx={{ width: '100%' }}>
+                                <Grid container rowSpacing={0} columnSpacing={3} sx={{ width: '90%' , paddingX: '5%'}}>
                                     {searchCriteria.genres.map(genre => (
                                         <Grid item xs={12}>
                                             <FormControlLabel

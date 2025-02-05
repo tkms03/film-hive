@@ -46,9 +46,6 @@ export default function MoviesSearchShowing({ page, searchParams }) {
 
             // クエリ文字列を生成
             const queryString = new URLSearchParams(params).toString();
-            console.log('searchParams:', searchParams);
-            console.log('queryString:', queryString);
-            console.log('params:', params);
 
             const response = await fetch(`${API_URL}?${queryString}`, {
                 method: 'GET',
@@ -60,7 +57,6 @@ export default function MoviesSearchShowing({ page, searchParams }) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json();
-            console.log('Movies:', data);
             dataCreate(data);
         } catch (error) {
             console.error('Error fetching movies:', error);
