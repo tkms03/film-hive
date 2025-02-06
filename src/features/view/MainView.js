@@ -6,7 +6,8 @@ import MoviesPopularityShowing from '../movies/MoviesPopularityShowing';
 import MoviesRatingShowing from '../movies/MoviesRatingShowing';
 import PageControl from '../movies/PageControl';
 import MoviesSearchShowing from '../movies/MoviesSearchShowing';
-import './MainView.css'
+import './MainView.css';
+import MyPage from '../mypage/MyPage';
 
 export default function MainView() {
     // ページ番号を管理
@@ -22,6 +23,7 @@ export default function MainView() {
         popularityShowing: <MoviesPopularityShowing page={page} />,
         ratingShowing: <MoviesRatingShowing page={page} />,
         searchShowing: <MoviesSearchShowing page={page} searchParams={searchParams} />, // 検索パラメータを渡す
+        myPage: <MyPage />
     };
 
     // PageControl からページ番号を受け取る
@@ -55,11 +57,11 @@ export default function MainView() {
         //     </div>
         // </div>
         <Grid container spacing={0} sx={{ width: '100%' }}>
-            <Grid xs={2}  sx={{ width: '100%' }}>
+            <Grid xs={2} sx={{ width: '100%' }}>
                 <List setActiveComponent={handleComponentChange} onSearch={handleSearch} />
             </Grid>
             <Grid xs={12} sx={{ width: '100%' }}>
-                {components[activeComponent] }
+                {components[activeComponent]}
             </Grid>
             <Grid xs={12} sx={{ width: '100%' }}>
                 <PageControl currentPage={page} onPageChange={updatePage} />
