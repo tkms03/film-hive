@@ -5,7 +5,7 @@
         "api_prefix": "api/"
       },
       "production": {
-        "base_url": "https://film-hive-api-e01e8a1d75df.herokuapp.com/",
+        "base_url": "https://film-hive-movies-api-e01e8a1d75df.herokuapp.com/",
         "api_prefix": "api/"
       }
     },
