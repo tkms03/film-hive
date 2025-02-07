@@ -1,30 +1,33 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography } from "@mui/material";
 import { useRef } from "react";
+import { UserAuth } from "./UserAuth";
 
 
 export default function LogInDialog({ openLogIn, onCloseLogIn, setShowSignIn, setIsLoggedIn }) {
 
     // 各TextFieldの参照を作成
-    const userIdRef = useRef();
+    const userIDRef = useRef();
     const passwordRef = useRef();
 
     // 「ログイン」ボタンクリック
-    const handleLogInClick = () => {
+    const handleLogInClick = async () => {
         const formData = {
-            userId: userIdRef.current.value,
+            userID: userIDRef.current.value,
             password: passwordRef.current.value
         }
 
+        // UserAuthからログイン結果を取得
+        const result = await UserAuth(formData);
+
         // TODO: ログイン認証
-        if (formData.userId === 'user' && formData.password === '12345678') {
+        if (result) {
             // ダイアログを閉じる
             onCloseLogIn();
             // 「ログイン」→「マイページ」にボタン切替
             setIsLoggedIn(true);
         } else {
-
+            // TODO:失敗時の処理
         }
-
     }
 
     // 「サインイン」ボタンクリック
@@ -42,7 +45,7 @@ export default function LogInDialog({ openLogIn, onCloseLogIn, setShowSignIn, se
             <DialogTitle>ログイン</DialogTitle>
             <DialogContent>
                 <div>
-                    <TextField label="ユーザID" inputRef={userIdRef} variant="outlined" margin="normal" />
+                    <TextField label="ユーザID" inputRef={userIDRef} variant="outlined" margin="normal" />
                 </div>
                 <div>
                     <TextField label="パスワード" inputRef={passwordRef} variant="outlined" margin="normal" type="password" />
