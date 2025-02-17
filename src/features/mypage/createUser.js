@@ -1,8 +1,9 @@
 import config from '../config.json'
 
-export async function userAuth(formData) {
+export async function createUser(formData) {
 
     const userData = {
+        user_name: formData.userName,
         user_id: formData.userID,
         password: formData.password
     };
@@ -19,8 +20,8 @@ export async function userAuth(formData) {
         return envConfig.base_url + config.endpoints[endpointKey];
     };
 
-    // "login" エンドポイントのURLを取得
-    const URL = getEndpointUrl("login");
+    // "createUser" エンドポイントのURLを取得
+    const URL = getEndpointUrl("createUser");
 
     try {
         const response = await fetch(URL, {

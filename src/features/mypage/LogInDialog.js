@@ -1,7 +1,6 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography } from "@mui/material";
 import { useRef } from "react";
-import { UserAuth } from "./UserAuth";
-
+import { userAuth } from "./userAuth";
 
 export default function LogInDialog({ openLogIn, onCloseLogIn, setShowSignIn, setIsLoggedIn }) {
 
@@ -16,8 +15,8 @@ export default function LogInDialog({ openLogIn, onCloseLogIn, setShowSignIn, se
             password: passwordRef.current.value
         }
 
-        // UserAuthからログイン結果を取得
-        const result = await UserAuth(formData);
+        // userAuthからログイン結果を取得
+        const result = await userAuth(formData);
 
         // TODO: ログイン認証
         if (result) {

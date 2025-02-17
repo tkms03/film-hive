@@ -14,8 +14,8 @@
       "popularity": "popularity/",
       "rating": "rating/",
       "search": "search/",
-      "logIn": "logIn/",
-      "createUser": "createUser/"
+      "login": "login",
+      "createUser": "createUser"
     }
   }
   

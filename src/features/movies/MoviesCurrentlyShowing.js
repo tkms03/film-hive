@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import MoviesShowing from './MoviesShowing';
 import './MoviesShowing.css';
-import config from './moviesCriteria.json';
+import config from '../config.json';
 
 export default function MoviesCurrentlyShowing({ page }) {
 
