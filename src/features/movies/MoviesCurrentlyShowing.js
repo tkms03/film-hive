@@ -72,6 +72,7 @@ export default function MoviesCurrentlyShowing({ page }) {
             res.results.forEach(movie => {
                 // 各映画の情報をdataに追加
                 data.push({
+                    id: movie.id,
                     title: movie.title,
                     poster: movie.poster_path,
                     voteCount: movie.vote_count,

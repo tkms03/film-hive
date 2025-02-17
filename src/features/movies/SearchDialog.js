@@ -53,18 +53,20 @@ export default function SearchDialog({
             const searchData = {
                 // keyword: keyword,
                 releaseYear: {
-                    from: dayjs.isDayjs(valueFrom) ? valueFrom.toDate().toLocaleDateString(
-                        "ja-JP", {
-                        year: "numeric",
-                        month: "2-digit",
-                        day: "2-digit"
-                    }).replaceAll('/', '-') : '',
-                    to: dayjs.isDayjs(valueTo) ? valueTo.toDate().toLocaleDateString(
-                        "ja-JP", {
-                        year: "numeric",
-                        month: "2-digit",
-                        day: "2-digit"
-                    }).replaceAll('/', '-') : ''
+                    from: dayjs(valueFrom).isValid()
+                        ? new Intl.DateTimeFormat("ja-JP", {
+                            year: "numeric",
+                            month: "2-digit",
+                            day: "2-digit"
+                        }).format(dayjs(valueFrom).toDate()).replace(/\//g, '-')
+                        : '',
+                    to: dayjs(valueTo).isValid()
+                        ? new Intl.DateTimeFormat("ja-JP", {
+                            year: "numeric",
+                            month: "2-digit",
+                            day: "2-digit"
+                        }).format(dayjs(valueTo).toDate()).replace(/\//g, '-')
+                        : '',
                 },
                 rating: {
                     min: ratingValue[0],
@@ -138,7 +140,7 @@ export default function SearchDialog({
                             </Typography>
                         </Grid>
                         <Grid item xs={12} sx={{ width: '100%' }}>
-                            <Grid container spacing={2} sx={{ width: '100%' , justifyContent: 'center'}}>
+                            <Grid container spacing={2} sx={{ width: '100%', justifyContent: 'center' }}>
                                 <Grid item xs={6}>
                                     <MobileDatePicker
                                         label={'FROM'}
@@ -239,7 +241,7 @@ export default function SearchDialog({
                                         ジャンル
                                     </Typography>
                                 </Grid>
-                                <Grid container rowSpacing={0} columnSpacing={3} sx={{ width: '90%' , paddingX: '5%'}}>
+                                <Grid container rowSpacing={0} columnSpacing={3} sx={{ width: '90%', paddingX: '5%' }}>
                                     {searchCriteria.genres.map(genre => (
                                         <Grid item xs={12}>
                                             <FormControlLabel

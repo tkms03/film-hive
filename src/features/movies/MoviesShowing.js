@@ -10,6 +10,11 @@ import './MoviesShowing.css';
 
 export default function MoviesShowing({ movies }) {
 
+    const handleClick = (id) =>{
+        // 詳細情報検索APIにidを渡す
+        // ページ遷移
+    }
+
     return (
         <div className="movies-laout">
             <Grid container
@@ -17,7 +22,11 @@ export default function MoviesShowing({ movies }) {
                 rowSpacing={5}
             >
                 {movies.map((movie, index) => (
-                    <Grid size={{ xs: 6, sm: 3, md: 2, lg: 1.5 }} key={movie.id}>
+                    <Grid
+                        size={{ xs: 6, sm: 3, md: 2, lg: 1.5 }}
+                        key={movie.id}
+                        onClick={handleClick(movie.id)}
+                    >
                         <table className="table-layout">
                             <tbody>
                                 <tr>
@@ -31,7 +40,7 @@ export default function MoviesShowing({ movies }) {
                                                         className="poster-image"
                                                     />
                                                 ) : (
-                                                    <ImageNotSupportedIcon className="poster-image"/>
+                                                    <ImageNotSupportedIcon className="poster-image" />
                                                 )}
                                             </div>
                                             <div className="info-layout">
