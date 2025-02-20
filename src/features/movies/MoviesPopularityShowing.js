@@ -4,7 +4,7 @@ import MoviesShowing from './MoviesShowing';
 import './MoviesShowing.css';
 import config from '../config.json';
 
-export default function MoviesCurrentlyShowing({ page }) {
+export default function MoviesPopularityShowing({ page }) {
 
     // サーバーのエンドポイントURL
     // 開発環境

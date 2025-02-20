@@ -51,7 +51,7 @@ export default function List({ setActiveComponent, onSearch }) {
           <Button
             color="black"
             variant={'outlined'}
-            disabled="true"
+            disabled={true}
           >
             キーワード検索</Button>
         </Grid>

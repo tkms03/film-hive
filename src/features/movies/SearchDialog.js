@@ -273,7 +273,7 @@ export default function SearchDialog({
                                 </Grid>
                                 <Grid item xs={12} sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                                     <Slider
-                                        getAriaLabel={() => 'Temperature range'}
+                                        getAriaLabel={() => 'Small'}
                                         value={ratingValue}
                                         min={searchCriteria.rating.min}
                                         max={searchCriteria.rating.max}
@@ -284,7 +284,7 @@ export default function SearchDialog({
                                             width: '90%',
                                         }}
                                         size="small"
-                                        aria-label="Small"
+                                        // aria-label="Small"
                                         color="black"
                                     />
                                 </Grid>

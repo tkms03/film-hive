@@ -1,17 +1,19 @@
 
 import React from 'react';
 import Grid from "@mui/material/Grid2";
-import Rating from '@mui/lab/Rating';
+import { Rating } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 import { Box } from '@mui/material';
 import './MoviesShowing.css';
 
-export default function MoviesShowing({ movies }) {
+export default function MoviesShowing({ movies, setActiveComponent, setMovieId }) {
 
-    const handleClick = (id) =>{
+    const handleClick = (id) => {
         // 詳細情報検索APIにidを渡す
+        setMovieId(id);  // 選択された映画のIDを状態管理
+        setActiveComponent("detailShowing");
         // ページ遷移
     }
 
@@ -25,9 +27,9 @@ export default function MoviesShowing({ movies }) {
                     <Grid
                         size={{ xs: 6, sm: 3, md: 2, lg: 1.5 }}
                         key={movie.id}
-                        onClick={handleClick(movie.id)}
                     >
-                        <table className="table-layout">
+                        <table className="table-layout"
+                            onClick={() => handleClick(movie.id)}>
                             <tbody>
                                 <tr>
                                     <td key={index} className="movie-layout">

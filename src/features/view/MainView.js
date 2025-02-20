@@ -6,8 +6,10 @@ import MoviesPopularityShowing from '../movies/MoviesPopularityShowing';
 import MoviesRatingShowing from '../movies/MoviesRatingShowing';
 import PageControl from '../movies/PageControl';
 import MoviesSearchShowing from '../movies/MoviesSearchShowing';
+import MoviesDetailShowing from '../movies/MoviesDetailShowing';
 import './MainView.css';
 import MyPage from '../mypage/MyPage';
+// import id from 'date-fns/locale/id';
 
 export default function MainView() {
     // ページ番号を管理
@@ -16,13 +18,16 @@ export default function MainView() {
     const [activeComponent, setActiveComponent] = useState('currentlyShowing');
     // 検索パラメータを管理
     const [searchParams, setSearchParams] = useState(null);
+    // 選択された映画IDを管理
+    const [movieId, setMovieId] = useState(null);
 
     // 動的に切り替えるコンポーネントのマッピング
     const components = {
-        currentlyShowing: <MoviesCurrentlyShowing page={page} />,
+        currentlyShowing: <MoviesCurrentlyShowing page={page} setActiveComponent={setActiveComponent} setMovieId={setMovieId} />,
         popularityShowing: <MoviesPopularityShowing page={page} />,
         ratingShowing: <MoviesRatingShowing page={page} />,
         searchShowing: <MoviesSearchShowing page={page} searchParams={searchParams} />, // 検索パラメータを渡す
+        detailShowing: <MoviesDetailShowing id={movieId} />, 
         myPage: <MyPage />
     };
 
