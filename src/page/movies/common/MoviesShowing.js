@@ -10,6 +10,7 @@ import List from './List';
 import PageControl from './PageControl';
 import { useAppContext } from '../../../context/AppContext';
 import './MoviesShowing.css';
+import MoviesDetailShowing from 'page/detail/MoviesDetailShowing'
 
 export default function MoviesShowing({ movies }) {
 
@@ -60,7 +61,7 @@ export default function MoviesShowing({ movies }) {
                 </Grid>
                 {movies.map((movie, index) => (
                     <Grid
-                        size={{ xs: 6, sm: 3, md: 2, lg: 1.5 }}
+                        size={{ xs: 3, sm: 2, md: 1.5, lg: 1.2, xl: 1.2 }}
                         key={movie.id}
                     >
                         <table className="table-layout"
@@ -72,9 +73,14 @@ export default function MoviesShowing({ movies }) {
                                         <div>
                                             <div className="poster">
                                                 {movie.poster ? (
-                                                    <img
+                                                    <Box
+                                                        component="img"
                                                         src={`https://image.tmdb.org/t/p/w500${movie.poster}`}
-                                                        className="poster-image"
+                                                        // className="poster-image"
+                                                        sx={{
+                                                            minHeight: { xs: '150px', sm: '130px', md: '130px', lg: '170px', xl: '200px' },
+                                                            maxHeight: { xs: '150px', sm: '130px', md: '130px', lg: '170px', xl: '200px' }
+                                                        }}
                                                     />
                                                 ) : (
                                                     <ImageNotSupportedIcon className="poster-image" />

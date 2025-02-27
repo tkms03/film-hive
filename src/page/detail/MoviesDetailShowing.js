@@ -1,18 +1,18 @@
 // import React from 'react';
 import React, { useState, useEffect } from 'react';
-import Grid from "@mui/material/Grid";
 import { useParams } from 'react-router-dom';
 import config from 'config.json';
+import DetailShowing from 'page/detail/DetailShowing'
 
 export default function MoviesDetailShowing() {
 
     const { id } = useParams();
 
     // サーバーのエンドポイントURL
-    // 開発環境
-    const environment = "development";
+    // 開発環境 
+    // const environment = "development";
     // 本番環境
-    // const environment = "production";
+    const environment = "production";
     const envConfig = config.environments[environment];
 
     // ベースURL + APIパス + エンドポイントを組み立てる関数
@@ -23,7 +23,7 @@ export default function MoviesDetailShowing() {
     // "movies" エンドポイントのURLを取得
     const API_URL = getEndpointUrl("detail");
 
-    const [detailData, setDetailData] = useState([]);
+    const [detailData, setDetailData] = useState(null);
 
     // データを取得する関数
     const fetchMovies = async () => {
@@ -54,28 +54,15 @@ export default function MoviesDetailShowing() {
 
     useEffect(() => {
         fetchMovies();
-    }, []);
+    }, [id]);
 
     return (
-        // <DetailShowing detailData={detailData}>
-            <Grid container rowSpacing={2}>
-                {/* 12:タイトル、公開日*/}
-                {/* 12:原題、元の言語、製造会社、生産国*/}
-                {/* 12:時間、ジャンル */}
-                {/* 12:コンテナ */}
-                {/*   3:ポスター */}
-                {/*   9:コンテナ */}
-                {/*     12:評価数、評価 */}
-                {/*     12:ボタン、HP */}
-                {/*     12:あらすじ */}
-                {/*     12:予算、収益 */}
-                {/* 12:キャスト、スタッフ */}
-                {/* 12*おすすめ   */}
-                <Grid item xs={6}>
-                </Grid>
-            </Grid>
-
-
-        // </DetailShowing>
+        <div>
+            {detailData ? (
+                <DetailShowing detailData={detailData} />
+            ) : (
+                <p>Loading...</p>
+            )}
+        </div>
     );
 }

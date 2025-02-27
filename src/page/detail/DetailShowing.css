@@ -1,0 +1,23 @@
+.poster-image {
+    /* height: 400px;
+    min-height: 400px;
+    max-height: 400px; */
+}
+
+.cast-image {
+    height: 150px;
+    min-height: 150px;
+    max-height: 150px;
+}
+
+.crew-image {
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+}
+
+.recommendations-poster-image {
+    height: 100px;
+    min-height: 100px;
+    max-height: 100px;
+}

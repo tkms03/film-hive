@@ -42,6 +42,7 @@ function App() {
                     {/* マイページ、映画詳細、映画一覧の表示を制御 */}
                     <Routes>
                         <Route path="/*" element={<MainView />} />
+                        <Route path="/detailShowing/:id" element={<MoviesDetailShowing  />} />
                         <Route path="/myPage" element={isLoggedIn ? <MyPage setIsLoggedIn={setIsLoggedIn} /> : <Navigate to="/" />} />
                     </Routes>
                     {/* {showMyPage ? (
